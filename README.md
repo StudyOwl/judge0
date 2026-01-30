@@ -1,3 +1,6 @@
+docker build   --target production   -t itspr/judge0:arm64 .
+docker push itspr/judge0:arm64
+
 [![Judge0 Wallpaper](./.github/Judge0%20Wallpaper%2002%20Center%20White%208192x4609.png)](https://judge0.com)
 
 # Judge0
