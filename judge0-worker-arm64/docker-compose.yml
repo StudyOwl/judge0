@@ -1,0 +1,31 @@
+version: "3.8"
+
+services:
+  workers:
+    image: itspr/judge0:arm64
+    platform: linux/arm64
+    command: ["./scripts/workers"]
+    volumes:
+      - ./judge0.conf:/judge0.conf:ro
+    privileged: true
+    restart: always
+    logging:
+      driver: json-file
+      options:
+        max-size: "100m"
+        max-file: "3"
+
+  # Health check container for ELB
+  health:
+    image: nginx:alpine
+    platform: linux/arm64
+    ports:
+      - "80:80"
+    volumes:
+      - ./health.conf:/etc/nginx/conf.d/default.conf:ro
+    restart: always
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "2"
