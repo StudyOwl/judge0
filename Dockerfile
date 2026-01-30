@@ -23,6 +23,12 @@ RUN apt-get update && \
     gem install bundler:2.1.4 && \
     npm install -g --unsafe-perm aglio@2.3.0
 
+RUN apt-get update && \
+    /usr/local/python-3.8.1/bin/python3 -m pip install --upgrade pip &&\
+    /usr/local/python-3.8.1/bin/python3 -m pip install \
+    numpy \
+    pandas 
+
 EXPOSE 2358
 
 WORKDIR /api
