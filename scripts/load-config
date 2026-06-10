@@ -37,6 +37,10 @@ export AUTHZ_HEADER=${AUTHZ_HEADER:-X-Auth-User}
 export INTERVAL=${INTERVAL:-0.1}
 export COUNT=${COUNT:-$(( $(nproc) * 2 ))}
 export QUEUE=${JUDGE0_VERSION:-unknown} # This option is not available in judge0.conf
+export EXECUTION_BOX_ID_MIN=${EXECUTION_BOX_ID_MIN:-0}
+export EXECUTION_BOX_POOL_SIZE=${EXECUTION_BOX_POOL_SIZE:-$(( $(nproc) * 64 ))}
+export EXECUTION_BOX_LEASE_TIMEOUT=${EXECUTION_BOX_LEASE_TIMEOUT:-30}
+export EXECUTION_BOX_LOCK_DIR=${EXECUTION_BOX_LOCK_DIR:-/tmp/judge0-execution-box-locks}
 
 # Database
 export REDIS_HOST=${REDIS_HOST:-localhost}

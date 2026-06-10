@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_05_28_155848) do
+ActiveRecord::Schema.define(version: 2026_06_10_155000) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -65,6 +65,8 @@ ActiveRecord::Schema.define(version: 2022_05_28_155848) do
     t.datetime "updated_at"
     t.string "queue_host"
     t.string "execution_host"
+    t.index ["status_id", "created_at"], name: "index_submissions_on_status_id_and_created_at"
+    t.index ["status_id"], name: "index_submissions_on_status_id"
     t.index ["token"], name: "index_submissions_on_token"
   end
 
