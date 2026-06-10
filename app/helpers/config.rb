@@ -1,3 +1,5 @@
+require "etc"
+
 module Config
   # For more info read:
   # https://github.com/judge0/judge0/blob/master/judge0.conf
@@ -13,6 +15,10 @@ module Config
   CALLBACKS_TIMEOUT = (ENV["CALLBACKS_TIMEOUT"].presence || 5).to_f
   ENABLE_ADDITIONAL_FILES = ENV["ENABLE_ADDITIONAL_FILES"] != "false"
   MAX_QUEUE_SIZE = (ENV["MAX_QUEUE_SIZE"].presence || 100).to_i
+  EXECUTION_BOX_ID_MIN = (ENV["EXECUTION_BOX_ID_MIN"].presence || 0).to_i
+  EXECUTION_BOX_POOL_SIZE = (ENV["EXECUTION_BOX_POOL_SIZE"].presence || [Etc.nprocessors * 64, 1024].max).to_i
+  EXECUTION_BOX_LEASE_TIMEOUT = (ENV["EXECUTION_BOX_LEASE_TIMEOUT"].presence || 30).to_f
+  EXECUTION_BOX_LOCK_DIR = ENV["EXECUTION_BOX_LOCK_DIR"].presence || Rails.root.join("tmp", "execution_box_locks").to_s
   CPU_TIME_LIMIT = (ENV["CPU_TIME_LIMIT"].presence || 5).to_f
   MAX_CPU_TIME_LIMIT = (ENV["MAX_CPU_TIME_LIMIT"].presence || 15).to_f
   CPU_EXTRA_TIME = (ENV["CPU_EXTRA_TIME"].presence || 1).to_f
@@ -56,6 +62,10 @@ module Config
       "callbacks_timeout": CALLBACKS_TIMEOUT,
       "enable_additional_files": ENABLE_ADDITIONAL_FILES,
       "max_queue_size": MAX_QUEUE_SIZE,
+      "execution_box_id_min": EXECUTION_BOX_ID_MIN,
+      "execution_box_pool_size": EXECUTION_BOX_POOL_SIZE,
+      "execution_box_lease_timeout": EXECUTION_BOX_LEASE_TIMEOUT,
+      "execution_box_lock_dir": EXECUTION_BOX_LOCK_DIR,
       "cpu_time_limit": CPU_TIME_LIMIT,
       "max_cpu_time_limit": MAX_CPU_TIME_LIMIT,
       "cpu_extra_time": CPU_EXTRA_TIME,
