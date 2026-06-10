@@ -1,6 +1,5 @@
 class InfoController < ApplicationController
   @@license ||= File.read("LICENSE")
-  @@isolate ||= `isolate --version`
 
   def system_info
     render json: SystemInfo.sys_info
@@ -28,7 +27,7 @@ class InfoController < ApplicationController
   end
 
   def isolate
-    render plain: @@isolate
+    render plain: isolate_version
   end
 
   def statistics
@@ -94,5 +93,13 @@ class InfoController < ApplicationController
         }
       }
     }
+  end
+
+  private
+
+  def isolate_version
+    @@isolate ||= `isolate --version 2>&1`
+  rescue Errno::ENOENT
+    "isolate is not installed on this host\n"
   end
 end
